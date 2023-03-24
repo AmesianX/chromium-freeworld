@@ -251,7 +251,9 @@ Patch409:       moc_name.patch
 %patch -P1303 -p1
 %patch -P1304 -p1
 %patch -P1305 -p1
+%if 0%{?fedora} == 36
 %patch -P1306 -p1
+%endif
 %patch -P1307 -p1
 %endif
 
