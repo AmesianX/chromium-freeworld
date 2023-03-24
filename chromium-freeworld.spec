@@ -26,7 +26,11 @@
 %global system_aom 1
 %endif
 # Chrome upstream uses custom ffmpeg patches
+%if 0%{?fedora} == 36
+%global system_ffmpeg 0
+%else
 %global system_ffmpeg 1
+%endif
 %global system_flac 1
 %global system_fontconfig 1
 # fedora freetype is too old
@@ -208,8 +212,7 @@ Patch1302:      chromium-unbundle-zlib.patch
 Patch1303:      chromium-107-ffmpeg-duration.patch
 Patch1304:      chromium-107-proprietary-codecs.patch
 Patch1305:      chromium-108-ffmpeg-first_dts.patch
-Patch1306:      chromium-108-ffmpeg-revert-new-channel-layout-api.patch
-Patch1307:      chromium-108-system-opus.patch
+Patch1306:      chromium-108-system-opus.patch
 
 # RPM Fusion patches [free/chromium-freeworld]:
 Patch401:       chromium-fix-vaapi-on-intel.patch
@@ -251,10 +254,7 @@ Patch409:       moc_name.patch
 %patch -P1303 -p1
 %patch -P1304 -p1
 %patch -P1305 -p1
-%if 0%{?fedora} == 36
 %patch -P1306 -p1
-%endif
-%patch -P1307 -p1
 %endif
 
 ./build/linux/unbundle/replace_gn_files.py --system-libraries \
